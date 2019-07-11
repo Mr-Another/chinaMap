@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>3D地图</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #container {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+  <script
+    type="text/javascript"
+    src="https://webapi.amap.com/maps?v=1.4.15&key=8be238584d95b17119a9659b06876584&plugin=AMap.ControlBar"
+  ></script>
+  <!-- 控制器插件 -->
+  <script>
+    var map = new AMap.Map("container", {
+      resizeEnable: true,
+      zoom: 18, // 级别
+      center: [108.939816526, 34.3412614674], //中心位置
+      //mapStyle: 'amap://styles/whitesmoke', //设置地图的显示样式
+      layers: [
+        new AMap.TileLayer(), //切片图层类
+        //new AMap.TileLayer.Satellite(), //卫星类图层，继承自TileLayer
+        new AMap.TileLayer.RoadNet(), //路网图层，继承自TileLayer
+        // new AMap.TileLayer.Traffic(),    //实时交通，继承自TileLayer
+        new AMap.Buildings() //楼快图层，独立显示矢量楼快数据
+        //new AMap.MassMarks(),   //图海量麻点图层类
+        //new AMap.LabelsLayer(),  //标注图层，用于添加 LabelMarker 类型标注
+        //new AMap.LayerGroup()    // 图层集合，用来包装其它图层类的实例并对集合做批量操作
+      ], //设置图层  可设置数组
+      pitch: 75, // 地图俯仰角度，有效范围 0 度- 83 度
+      viewMode: "3D" //使用3d视图
+    });
+    map.addControl(
+      new AMap.ControlBar({
+        showZoomBar: false,
+        showControlButton: true,
+        position: {
+          right: "10px",
+          top: "10px"
+        }
+      })
+    );
+  </script>
+</html>
